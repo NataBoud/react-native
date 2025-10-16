@@ -1,18 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Dimensions } from 'react-native';
+import { StyleSheet, Text, ScrollView, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ContactCard from './components/Contact';
+import { contacts } from './data';
 
 const { width } = Dimensions.get('window');
 
 export default function App() {
   return (
-    <SafeAreaView style={styles.ecran}>
+    <SafeAreaView style={styles.ecran} edges={['top']}>
       <StatusBar style="light" />
-      <View style={styles.container}>
+
+      <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.text}>Contacts</Text>
-        <ContactCard />
-      </View>
+        {contacts.map(contact => (
+          <ContactCard key={contact.id} contact={contact} />
+        ))}
+      </ScrollView>
     </SafeAreaView>
   );
 }
