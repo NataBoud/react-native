@@ -1,23 +1,22 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image, Modal, Pressable, TouchableOpacity, Alert } from 'react-native'
+import { View, Text, StyleSheet, Image, Modal, Pressable, TouchableOpacity, Linking, Alert } from 'react-native'
 import { MaterialIcons, Entypo } from '@expo/vector-icons'
 
 export default function ModalContactInfo({ contact, visible, onClose }) {
     if (!contact) return null 
 
     async function makeCall() {
-        try {
-            const possible = await Linking.canOpenURL(`tel:${contact.telephone}`)
-            if (possible) {
-                await Linking.openURL(`tel:${contact.telephone}`)
-            } else {
-                Alert.alert("Pas possible ici", "Cette action n'est pas supportée sur cet appareil.")
-            }
-        } catch (error) {
-            Alert.alert("Erreur", "Une erreur est survenue.")
-        }
-    }
+ 
+            const phoneNumber = contact.telephone.replace(/\s+/g, '')
+            const url = phoneNumber
+            const possible = await Linking.canOpenURL(url)
 
+            if (possible) {
+                await Linking.openURL(url)
+            } else {
+                Alert.alert("Pas possible ici")
+            }
+    }
 
     return (
         <Modal
