@@ -1,10 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import Demo from './components/Demo';
+import ContactCard from './components/Contact';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Hello world !!!!</Text>
+      <Text>Contacts</Text>
+      <ContactCard />
       <StatusBar style="auto" />
     </View>
   );
@@ -13,7 +16,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#dcdedeff',
     alignItems: 'center',
     justifyContent: 'center',
   },
