@@ -13,10 +13,17 @@ export default function App() {
 
       <ScrollView contentContainerStyle={styles.container}>
         <Text style={styles.text}>Contacts</Text>
-        {contacts.map(contact => (
-          <ContactCard key={contact.id} contact={contact} />
-        ))}
+
+        {contacts.length > 0 ? (
+          contacts.map(contact => (
+            <ContactCard key={contact.id} contact={contact} />
+          ))
+        ) : (
+          <Text style={styles.noContact}>Aucun contact</Text>
+        )}
       </ScrollView>
+
+
     </SafeAreaView>
   );
 }
@@ -37,4 +44,10 @@ const styles = StyleSheet.create({
     color: '#efeaeaff',
     marginBottom: 10,
   },
+  noContact: {
+    color: '#c5c5c5ff',
+    fontSize: 16,
+    marginTop: 20,
+    textAlign: 'left',
+  }
 });

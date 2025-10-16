@@ -4,18 +4,10 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons'
 
 // npx expo install @expo/vector-icons
 
-
 export default function ContactCard({contact}) {
-    // const contact = {
-    //     nom: 'Toto Tatatata',
-    //     telephone: '+33 6 12 34 56 78',
-    //     email: 'toto.tata@example.com',
-    //     avatar: 'https://picsum.photos/100', 
-    // }
 
     return (
         <View style={styles.card}>
-
             <View style={styles.rowName}>
                 <Image source={{ uri: contact.avatar }} style={styles.avatar} />
                 <Text style={styles.nom}>{contact.nom}</Text>
