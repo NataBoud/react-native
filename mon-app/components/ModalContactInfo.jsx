@@ -6,7 +6,6 @@ export default function ModalContactInfo({ contact, visible, onClose }) {
     if (!contact) return null 
 
     async function makeCall() {
- 
             const phoneNumber = contact.telephone.replace(/\s+/g, '')
             const url = phoneNumber
             const possible = await Linking.canOpenURL(url)
@@ -14,9 +13,21 @@ export default function ModalContactInfo({ contact, visible, onClose }) {
             if (possible) {
                 await Linking.openURL(url)
             } else {
-                Alert.alert("Pas possible ici")
+                Alert.alert("Pas possible ici", "Cette action n'est pas supportée sur cet appareil.")
             }
     }
+
+    async function sendEmail() {
+            const url = `mailto:${contact.email}`
+            const possible = await Linking.canOpenURL(url)
+
+            if (possible) {
+                await Linking.openURL(url)
+            } else {
+                Alert.alert("Pas possible ici", "Cette action n'est pas supportée sur cet appareil.")
+            }
+    }
+
 
     return (
         <Modal
@@ -30,17 +41,17 @@ export default function ModalContactInfo({ contact, visible, onClose }) {
                     <Image source={{ uri: contact.avatar }} style={styles.avatarLarge} />
                     <Text style={styles.nomModal}>{contact.nom}</Text>
 
-                    <TouchableOpacity onPress={makeCall} style={styles.row}>
+                    <TouchableOpacity activeOpacity={0.2} onPress={makeCall} style={styles.row}>
                         <MaterialIcons name="phone" size={18} color="#c5c5c5ff" />
                         <Text style={styles.info}>{contact.telephone}</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.row}>
+                    <TouchableOpacity activeOpacity={0.2} onPress={sendEmail} style={styles.row}>
                         <Entypo name="mail" size={18} color="#c5c5c5ff" />
                         <Text style={styles.info}>{contact.email}</Text>
                     </TouchableOpacity>
 
-                    <TouchableOpacity activeOpacity={0.2} style={styles.btnClose} onPress={onClose}>
+                    <TouchableOpacity  activeOpacity={0.2} style={styles.btnClose} onPress={onClose}>
                         <Text style={styles.btnCloseText}>Fermer</Text>
                     </TouchableOpacity>
                 </View>
@@ -93,11 +104,11 @@ const styles = StyleSheet.create({
         marginTop: 20,
         backgroundColor: '#40364aff',
         borderRadius: 10,
-        paddingVertical: 8,
-        paddingHorizontal: 20,
+        paddingVertical: 6,
+        paddingHorizontal: 10,
     },
     btnCloseText: {
         color: '#efeaeaff',
-        fontSize: 16,
+        fontSize: 14,
     },
 })
