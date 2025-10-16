@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
     fontWeight: '700',
     color: '#efeaeaff',
+    
     marginBottom: 10,
   },
   noContact: {
