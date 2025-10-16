@@ -2,11 +2,12 @@
 formation
 
 Contacts :  
-![Contacts](./mon-app/assets/modals.PNG)
+<img src="./mon-app/assets/modals.PNG" width="300">
 
 Modal :  
-![Contacts](./mon-app/assets/tel.PNG)
+<img src="./mon-app/assets/tel.PNG" width="300">
 
 Liste des contacts :  
-![Contacts](./mon-app/assets/Capture.PNG)
+<img src="./mon-app/assets/Capture.PNG" width="300">
+
 
