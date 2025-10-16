@@ -1,32 +1,39 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Dimensions, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ContactCard from './components/Contact';
-import { contacts } from './data';
+import ContactCard from './components/ContactCard';
+import { contacts as contactsData } from './data';
+import { useState } from 'react';
+import ContactList from './components/ContactList';
+import ModalContactInfo from './components/ModalContactInfo';
 
-const { width } = Dimensions.get('window');
 
 export default function App() {
+
+  const [contacts] = useState(contactsData)
+  const [selectedContact, setSelectedContact] = useState(null)
+  const [isModalVisible, setModalVisible] = useState(false)
+
+  const openDetails = (contact) => {
+    setSelectedContact(contact)
+    setModalVisible(true)
+  }
+
+  const closeDetails = () => {
+    setModalVisible(false)
+  }
+
   return (
     <>
-    <SafeAreaView style={styles.ecran} edges={['top']}>
-      <StatusBar style="light" />
-
-      <View style={styles.container}>
-        <Text style={styles.text}>Contacts</Text>
-
-        {contacts.length > 0 ? (
-          <FlatList
-            data={contacts}
-            renderItem={({ item }) => <ContactCard contact={item} />}
-            keyExtractor={item => item.id}
-          />
-        ) : (
-          <Text style={styles.noContact}>Aucun contact</Text>
-        )}
-      </View>
-
-    </SafeAreaView>
+      <SafeAreaView style={styles.ecran} edges={['top']}>
+        <StatusBar style="light" />
+        <ContactList contacts={contacts} onSelect={openDetails} />
+        <ModalContactInfo
+          contact={selectedContact}
+          visible={isModalVisible}
+          onClose={closeDetails}
+        />
+      </SafeAreaView>
     </>
 
   );
@@ -37,22 +44,5 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#19141fff',
   },
-  container: {
-    width: width,
-    paddingHorizontal: 20,
-    paddingTop: 10,
-  },
-  text: {
-    fontSize: 28,
-    fontWeight: '600',
-    color: '#efeaeaff',
 
-    marginBottom: 10,
-  },
-  noContact: {
-    color: '#c5c5c5ff',
-    fontSize: 16,
-    marginTop: 20,
-    textAlign: 'left',
-  }
 });

@@ -1,26 +1,18 @@
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, Image, Modal, Pressable } from 'react-native'
 import { MaterialIcons, Entypo } from '@expo/vector-icons'
-import ModalContactInfo from './ModalContactInfo'
 
-export default function ContactCard({ contact }) {
-    const [visible, setVisible] = useState(false)
 
+export default function ContactCard({ contact, onPress }) {
 
     return (
         <>
-            <Pressable style={styles.card} onPress={() => setVisible(true)}>
+            <Pressable style={styles.card} onPress={onPress}>
                 <View style={styles.rowName}>
                     <Image source={{ uri: contact.avatar }} style={styles.avatar} />
                     <Text style={styles.nom}>{contact.nom}</Text>
                 </View>
             </Pressable>
-
-            <ModalContactInfo
-                contact={contact}
-                visible={visible}
-                onClose={() => setVisible(false)}
-            />
         </>
     )
 }
