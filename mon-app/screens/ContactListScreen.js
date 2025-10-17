@@ -3,31 +3,22 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { StyleSheet, Button, View } from "react-native";
 import ContactList from "../components/ContactList";
 import { contacts as contactsData } from "../data";
+import { StatusBar } from 'expo-status-bar';
 
-export default function ContactListScreen({ navigation, route }) {
+export default function ContactListScreen({ navigation }) {
 
-  const [contacts, setContacts] = useState(contactsData);
-
-  useEffect(() => {
-    if (route.params?.newContact) {
-      setContacts((prev) => [route.params.newContact, ...prev]);
-    }
-  }, [route.params?.newContact]);
-
-  const openDetails = (contact) => {
-    navigation.navigate("ContactDetail", { contact });
-  };
+  const { contacts } = useContext(ContactsContext);
 
   return (
-    <SafeAreaView style={styles.ecran} edges={["top"]}>
-      <View style={styles.headerBtn}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#19141f" }}>
+      <View style={{ padding: 10, alignItems: "flex-end" }}>
         <Button
           title="Ajouter un contact"
           color="#7b68ee"
           onPress={() => navigation.navigate("AddContact")}
         />
       </View>
-      <ContactList contacts={contacts} onSelect={openDetails} />
+      <ContactList contacts={contacts} navigation={navigation} />
     </SafeAreaView>
   );
 }
