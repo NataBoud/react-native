@@ -1,5 +1,5 @@
-import { Text, StyleSheet, View, Dimensions, FlatList } from 'react-native'
-import React, { Component } from 'react'
+import { Text, StyleSheet, View, FlatList } from 'react-native'
+import React from 'react'
 import ContactCard from './ContactCard'
 
 export default function ContactList({ contacts, onSelect }) {
@@ -8,7 +8,12 @@ export default function ContactList({ contacts, onSelect }) {
             <Text style={styles.text}>Contacts</Text>
             <FlatList
                 data={contacts}
-                renderItem={({ item }) => <ContactCard contact={item} onPress={() => onSelect(item)} />}
+                renderItem={({ item }) => (
+                    <ContactCard
+                        contact={item}
+                        onPress={() => onSelect(item)}
+                    />
+                )}
                 keyExtractor={item => item.id}
             />
         </View>

@@ -6,14 +6,12 @@ import { MaterialIcons, Entypo } from '@expo/vector-icons'
 export default function ContactCard({ contact, onPress }) {
 
     return (
-        <>
-            <Pressable style={styles.card} onPress={onPress}>
-                <View style={styles.rowName}>
-                    <Image source={{ uri: contact.avatar }} style={styles.avatar} />
-                    <Text style={styles.nom}>{contact.nom}</Text>
-                </View>
-            </Pressable>
-        </>
+        <Pressable style={styles.card} onPress={onPress}>
+            <View style={styles.rowName}>
+                <Image source={{ uri: contact.avatar }} style={styles.avatar} />
+                <Text style={styles.nom}>{contact.nom}</Text>
+            </View>
+        </Pressable>
     )
 }
 

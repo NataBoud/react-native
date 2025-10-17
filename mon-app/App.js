@@ -1,48 +1,39 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import ContactCard from './components/ContactCard';
-import { contacts as contactsData } from './data';
-import { useState } from 'react';
-import ContactList from './components/ContactList';
-import ModalContactInfo from './components/ModalContactInfo';
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import ContactListScreen from "./screens/ContactListScreen";
+import ContactDetailScreen from "./screens/ContactDetailScreen";
+import AddContactScreen from "./screens/AddContactScreen";
 
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-
-  const [contacts] = useState(contactsData)
-  const [selectedContact, setSelectedContact] = useState(null)
-  const [isModalVisible, setModalVisible] = useState(false)
-
-  const openDetails = (contact) => {
-    setSelectedContact(contact)
-    setModalVisible(true)
-  }
-
-  const closeDetails = () => {
-    setModalVisible(false)
-  }
-
   return (
-    <>
-      <SafeAreaView style={styles.ecran} edges={['top']}>
-        <StatusBar style="light" />
-        <ContactList contacts={contacts} onSelect={openDetails} />
-        <ModalContactInfo
-          contact={selectedContact}
-          visible={isModalVisible}
-          onClose={closeDetails}
+    <NavigationContainer>
+      <Stack.Navigator
+        initialRouteName="Contacts"
+        screenOptions={{
+          headerStyle: { backgroundColor: "#19141f" },
+          headerTintColor: "#fff",
+          headerTitleAlign: "center",
+        }}
+      >
+        <Stack.Screen
+          name="Contacts"
+          component={ContactListScreen}
+          options={{ title: "Mes contacts" }}
         />
-      </SafeAreaView>
-    </>
-
+        <Stack.Screen
+          name="ContactDetail"
+          component={ContactDetailScreen}
+          options={{ title: "Détails du contact" }}
+        />
+        <Stack.Screen
+          name="AddContact"
+          component={AddContactScreen}
+          options={{ title: "Ajouter un contact" }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  ecran: {
-    flex: 1,
-    backgroundColor: '#19141fff',
-  },
-
-});
