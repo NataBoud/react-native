@@ -5,7 +5,7 @@ import ContactCard from './ContactCard'
 export default function ContactList({ contacts, onSelect }) {
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Contacts</Text>
+            <Text style={styles.text}>Mes contacts</Text>
             <FlatList
                 data={contacts}
                 renderItem={({ item }) => (

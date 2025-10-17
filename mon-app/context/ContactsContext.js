@@ -7,7 +7,7 @@ export const ContactsProvider = ({ children }) => {
     const [contacts, setContacts] = useState(contactsData);
 
     const addContact = (newContact) => {
-        setContacts(prev => [newContact, ...prev]); 
+        setContacts(prev => [newContact, ...prev]);
     };
 
     return (
