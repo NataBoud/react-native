@@ -5,7 +5,7 @@ import { ContactsContext } from "../context/ContactsContext";
 export default function AddContactScreen({ navigation }) {
 
     const { addContact } = useContext(ContactsContext);
-    
+
     const [nom, setNom] = useState("");
     const [telephone, setTelephone] = useState("");
     const [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ export default function AddContactScreen({ navigation }) {
         };
 
         addContact(newContact);
-        navigation.goBack();
+        navigation.replace("ContactDetail", { contact: newContact });
     };
 
     return (

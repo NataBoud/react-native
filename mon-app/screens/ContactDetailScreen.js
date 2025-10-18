@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Linking, Alert } from 'react-native';
 import { MaterialIcons, Entypo } from '@expo/vector-icons';
 
-export default function ContactDetailsScreen({ route }) {
+export default function ContactDetailsScreen({ route, navigation }) {
     const { contact } = route.params;
 
     async function makeCall() {
@@ -27,6 +27,10 @@ export default function ContactDetailsScreen({ route }) {
             Alert.alert("Impossible", "Cet appareil ne peut pas envoyer d'email.");
         }
     }
+
+    useEffect(() => {
+        navigation.setOptions({ title: contact ? contact.nom : "Détails du contact" });
+    }, [navigation, contact]);
 
     return (
         <View style={styles.container}>
